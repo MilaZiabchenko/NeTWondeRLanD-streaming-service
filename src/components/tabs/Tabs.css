@@ -1,0 +1,53 @@
+.tabs {
+  border-bottom: 5px solid hsl(0, 0%, 24%);
+}
+
+.tabs {
+  background: hsl(0, 0%, 8%);
+  padding-top: 2rem;
+  border-right: none;
+}
+
+.tabs .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tabs p {
+  font-size: 1.2rem;
+  padding-top: 0.5rem;
+}
+
+.tabs .container > div {
+  padding: 1.5rem 0;
+}
+
+.tabs .container > div:hover {
+  color: var(--light-color);
+  cursor: pointer;
+}
+
+.tab-border {
+  border-bottom: var(--primary-color) 5px solid;
+}
+
+.tab-content {
+  padding: 3rem 0;
+  color: var(--light-color);
+}
+
+.show {
+  display: block !important;
+  opacity: 1 !important;
+  transition: all 1000 ease-in;
+}
+
+@media (max-width: 600px) {
+  .tabs p {
+    font-size: 1rem;
+  }
+}

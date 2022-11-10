@@ -1,0 +1,46 @@
+.footer {
+  padding: 1.5rem;
+}
+
+.footer,
+.footer a {
+  font-size: 0.9rem;
+}
+
+.footer li {
+  line-height: 1.9;
+}
+
+.footer .footer-cols {
+  max-width: 900px;
+  margin: 3rem auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 2rem;
+}
+
+.copyright {
+  margin: 1rem auto;
+}
+
+.copyright p {
+  padding: 1.5rem;
+}
+
+.copyright span {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  .footer .footer-cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .footer-cols ul {
+    justify-self: start;
+    margin-left: 3rem;
+  }
+}

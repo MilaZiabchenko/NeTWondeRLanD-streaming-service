@@ -1,0 +1,44 @@
+ul:has(.favorite) {
+  max-width: 70rem;
+  margin: 5rem auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  grid-auto-flow: dense;
+  place-content: center;
+  gap: 1.25rem;
+}
+
+li.favorite {
+  height: 400px;
+  padding: 8px;
+  padding-bottom: 1rem;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+}
+
+li.favorite .image {
+  height: 320px;
+  width: 100%;
+  justify-self: start;
+  overflow: hidden;
+}
+
+li.favorite img {
+  transition: all 200ms ease-in-out;
+}
+
+li.favorite img:hover {
+  scale: 1.05;
+}
+
+li.favorite h3 {
+  font-size: 1.5rem;
+  font-family: 'Merienda', cursive;
+  justify-self: start;
+  align-self: center;
+}

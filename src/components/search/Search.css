@@ -1,0 +1,30 @@
+.search {
+  height: 100px;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search input {
+  width: 50%;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: 1px solid var(--border-color);
+  border-right: 0px solid transparent;
+  background-color: transparent;
+  color: var(--light-color);
+  font-size: 24px;
+}
+
+.search-icon {
+  display: grid;
+  place-items: center;
+  height: 50.5px;
+  width: 62.5px;
+  padding: 0 15px;
+  border: 1px solid var(--border-color);
+  border-left: 0px solid transparent;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

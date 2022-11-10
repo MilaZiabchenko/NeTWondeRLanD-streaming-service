@@ -1,0 +1,52 @@
+.show-details {
+  width: 50%;
+  margin: 5rem auto;
+}
+
+.show-details h2 {
+  font-size: 32px;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.card-details {
+  min-height: 350px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.card-details p {
+  margin: 2.5rem 0;
+  line-height: 1.75;
+}
+
+.card-details span:hover,
+.card-details span:hover > span {
+  color: hsla(0, 0%, 100%, 0.9);
+}
+
+.card-details i {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.fa-heart {
+  transition: all 200ms ease-in-out;
+}
+
+.fa-heart:hover {
+  transform: scale(1.125)
+}
+
+.card-details button {
+  margin: 3rem auto;
+  font-size: 1.25rem;
+}
+
+@media (max-width: 1080px) {
+  .show-details {
+    width: 80%
+  }
+}
