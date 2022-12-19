@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRef, useReducer, useEffect } from 'react';
 
 const useAxios = url => {
-  const cache = useRef({});
+  const cachedDataRef = useRef({});
 
   const initialState = {
     isLoading: false,
@@ -10,32 +10,29 @@ const useAxios = url => {
     error: null,
   };
 
-  const reducer = (state, action) => {
+  const dataFetchReducer = (state, action) => {
     switch (action.type) {
-      case 'start':
+      case 'fetch_init':
         return {
           ...initialState,
           isLoading: true,
         };
-
-      case 'success':
+      case 'fetch_success':
         return {
           ...initialState,
           data: action.payload,
         };
-
-      case 'fail':
+      case 'fetch_failure':
         return {
           ...initialState,
           error: action.payload,
         };
-
       default:
         return state;
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(dataFetchReducer, initialState);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -43,28 +40,28 @@ const useAxios = url => {
     if (!url || !url.trim()) return;
 
     const fetchData = async () => {
-      dispatch({ type: 'start' });
+      dispatch({ type: 'fetch_init' });
 
-      if (cache.current[url]) {
-        const cachedData = cache.current[url];
+      if (cachedDataRef.current[url]) {
+        dispatch({
+          type: 'fetch_success',
+          payload: cachedDataRef.current[url],
+        });
+
+        return;
+      }
+
+      try {
+        const response = await axios.get(url, { signal: controller.signal });
+
+        cachedDataRef.current[url] = response.data;
 
         dispatch({
-          type: 'success',
-          payload: cachedData,
+          type: 'fetch_success',
+          payload: response.data,
         });
-      } else {
-        try {
-          const response = await axios.get(url, { signal: controller.signal });
-
-          cache.current[url] = response.data;
-
-          dispatch({
-            type: 'success',
-            payload: response.data,
-          });
-        } catch (error) {
-          dispatch({ type: 'fail', payload: error.message });
-        }
+      } catch (error) {
+        dispatch({ type: 'fetch_failure', payload: error });
       }
     };
 

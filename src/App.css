@@ -2,10 +2,15 @@
 
 :root {
   --primary-color: hsl(357, 92%, 52%);
-  --background-color: hsl(0, 0%, 0%);
+  --background-color: hsl(0, 0%, 3%);
   --dark-color: hsl(0, 0%, 65%);
   --border-color: hsl(0, 0%, 80%);
   --light-color: hsl(0, 0%, 100%);
+}
+
+::selection {
+  color: var(--background-color);
+  background-color: var(--light-color);
 }
 
 ::-webkit-scrollbar {
@@ -52,6 +57,12 @@ a:hover {
   transition: all 100ms ease;
 }
 
+a.active {
+  color: var(--primary-color);
+  text-decoration: underline wavy var(--primary-color);
+  text-underline-offset: 6px;
+}
+
 h1,
 h2,
 h3,
@@ -84,11 +95,11 @@ input {
   display: block;
   width: 100%;
   margin: 1rem 0;
-  padding: 10.5px 15px;
+  padding: 0.6rem 1rem;
   border-radius: 5px;
   border: 1px solid hsla(0, 0%, 100%, 0.88);
   box-shadow: 0 5px 18px 0 hsla(0, 0%, 0%, 0.18);
-  font-size: 20px;
+  font-size: 1.2em;
 }
 
 i {
@@ -115,7 +126,7 @@ i {
   align-items: center;
   justify-content: space-between;
   width: 90%;
-  margin: 3rem auto;
+  margin: 3.75rem auto;
   z-index: 10;
 }
 
@@ -131,8 +142,8 @@ i {
 
 a.logo {
   font-family: 'Merienda', cursive;
-  font-size: 2rem;
-  letter-spacing: 0.125em;
+  font-size: 1.95em;
+  letter-spacing: 0.12em;
   color: var(--primary-color);
   transition: color 200ms ease-in-out;
 }
@@ -141,19 +152,18 @@ a.logo:hover {
   color: hsla(0, 0%, 100%, 0.9);
 }
 
-.links * {
+.links-list li > * {
   display: inline-block;
-  margin: 0 1.5em;
+  margin: 0.75rem;
 }
 
 .spinner {
-  width: 200px;
+  width: min(33vw, 180px);
   margin: auto;
 }
 
 .modal {
   position: relative;
-  width: 100%;
   height: 100vh;
   top: -100px;
   overflow: hidden;
@@ -164,11 +174,10 @@ a.logo:hover {
   position: relative;
   top: 120px;
   z-index: 10;
-  max-width: 420px;
-  height: fit-content;
-  min-height: 520px;
+  width: min((100% - 2rem), 420px);
+  height: min(fit-content, 520px);
   margin: auto;
-  padding: 2rem;
+  padding: 2rem min(5vw, 2rem);
   border-radius: 5px;
   box-shadow: 0 5px 8px 0 hsla(0, 0%, 0%, 0.2),
     0 7px 20px 0 hsla(0, 0%, 0%, 0.17);
@@ -194,11 +203,6 @@ a.logo:hover {
     inset 0 -10px 50px var(--background-color);
 }
 
-.sign-in {
-  height: 100px;
-  margin-bottom: 3rem;
-}
-
 .fa-google {
   margin: 0 8px;
 }
@@ -218,11 +222,11 @@ a.logo:hover {
 }
 
 .text-lg {
-  max-width: 35ch;
+  width: min(50ch, 95%);
   line-height: 1.75;
   margin: 3.5rem auto;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.9em;
 }
 
 .text-md {
@@ -241,7 +245,7 @@ a.logo:hover {
 }
 
 .text-dark {
-  max-width: 65%;
+  max-width: clamp(280px, 85%, 320px);
   margin: 0 auto;
   color: var(--dark-color);
   font-size: 1.1rem;
@@ -263,22 +267,16 @@ a.logo:hover {
   padding: 0.65rem 1.3rem;
   font-size: 1rem;
   text-align: center;
-  border: none;
-  cursor: pointer;
-  margin-right: 1rem;
-  transition: opacity 0.2s ease-in;
-  outline: none;
-  box-shadow: 3px 3px 9px hsla(0, 0%, 0%, 0.5);
   border-radius: 3px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in;
+  box-shadow: 3px 3px 9px hsla(0, 0%, 0%, 0.5);
 }
 
 .btn:hover {
   opacity: 0.9;
-}
-
-.btn:disabled {
-  background-color: transparent;
-  cursor: default;
 }
 
 .btn-center {
@@ -302,14 +300,14 @@ a.logo:hover {
   margin-left: 1rem;
 }
 
+.btn-transparent {
+  background-color: transparent;
+}
+
 .btn-submit {
   width: 100%;
   height: 50px;
   margin: 1rem 0;
-}
-
-.clear-btn {
-  cursor: pointer;
 }
 
 /* Media queries */
@@ -325,7 +323,7 @@ a.logo:hover {
   nav .btn {
     background: transparent;
     border: 1px solid;
-    margin: 0 auto;
+    margin: 1.5rem auto 0;
   }
 
   nav .btn:hover {
@@ -353,13 +351,12 @@ a.logo:hover {
 }
 
 @media (max-width: 500px) {
-  .logo {
+  a.logo {
     font-size: 1.65em;
-    margin-bottom: 1rem;
   }
 
-  .links * {
-    margin: 1rem 0.75rem 0;
+  .links-list li > * {
+    margin: 0.5rem;
   }
 
   nav {
@@ -372,12 +369,17 @@ a.logo:hover {
   }
 }
 
-@media (max-width: 350px) {
-  .links *,
+@media (max-width: 380px) {
+  .links-list,
   .btn-center {
-    margin: 0.75rem;
+    margin: 0.75rem auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+  }
+
+  .links-list li:last-child {
+    order: -1;
   }
 }

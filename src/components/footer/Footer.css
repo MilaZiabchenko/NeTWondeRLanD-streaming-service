@@ -14,7 +14,6 @@
 .footer .footer-cols {
   max-width: 900px;
   margin: 3rem auto;
-
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
@@ -36,11 +35,10 @@
 @media (max-width: 500px) {
   .footer .footer-cols {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0;
+    gap: 0.5rem;
   }
 
   .footer-cols ul {
     justify-self: start;
-    margin-left: 3rem;
   }
 }

@@ -3,10 +3,10 @@ ul:has(.favorite) {
   margin: 5rem auto;
   padding: 0 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  grid-template-columns: repeat(auto-fit, minmax(280px, auto));
   grid-auto-flow: dense;
   place-content: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 li.favorite {

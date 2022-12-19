@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ handleLogout }) => (
@@ -6,13 +6,24 @@ const Header = ({ handleLogout }) => (
     <Link to='/home' className='logo'>
       NeTWondeRLanD
     </Link>
-    <nav className='links'>
-      <Link to='/home'>Home</Link>
-      <Link to='/shows'>Shows</Link>
-      <Link to='/favorites'>Favorites</Link>
-      <Link to='/' className='btn btn-rounded' onClick={handleLogout}>
-        Log Out
-      </Link>
+    <nav>
+      <ul className='links-list'>
+        <li>
+          <NavLink to='/home'>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to='/shows'>Shows</NavLink>
+        </li>
+        <li>
+          {' '}
+          <NavLink to='/favorites'>Favorites</NavLink>
+        </li>
+        <li>
+          <Link to='/' className='btn btn-rounded' onClick={handleLogout}>
+            Log Out
+          </Link>
+        </li>
+      </ul>
     </nav>
   </header>
 );

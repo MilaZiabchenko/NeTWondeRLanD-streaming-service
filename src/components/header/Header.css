@@ -8,9 +8,9 @@
   z-index: 10;
 }
 
-.links * {
+.links-list li {
   display: inline-block;
-  margin: 0 1.5em;
+  margin: 0 0.5rem;
 }
 
 @media (max-width: 980px) {
@@ -39,21 +39,22 @@
   .logo {
     font-size: 1.65em;
   }
-
-  .links * {
-    margin: 1rem 0.75rem 0;
+  
+  .links-list {
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
-  nav {
-    margin: 1rem auto;
+  .links-list li {
+    margin: 0.2rem;
   }
 }
 
-@media (max-width: 350px) {
-  .links * {
-    margin: 0.75rem;
-    display: flex;
-    align-items: center;
+@media (max-width: 380px) {
+  .links-list {
+    flex-direction: column;
     justify-content: center;
   }
 }

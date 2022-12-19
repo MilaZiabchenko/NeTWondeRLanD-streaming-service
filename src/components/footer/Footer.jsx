@@ -51,7 +51,7 @@ const Footer = () => (
     </div>
     <div className='copyright text-center'>
       <p>
-        Copyright &copy; 2021-
+        &copy; 2021-
         {new Date().getFullYear()}
         <span>NeTWondeRLanD </span>
       </p>

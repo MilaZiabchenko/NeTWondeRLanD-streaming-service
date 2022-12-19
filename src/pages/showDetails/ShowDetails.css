@@ -37,16 +37,16 @@
 }
 
 .fa-heart:hover {
-  transform: scale(1.125)
+  transform: scale(1.125);
 }
 
-.card-details button {
+.card-details .btn-lg {
   margin: 3rem auto;
   font-size: 1.25rem;
 }
 
 @media (max-width: 1080px) {
   .show-details {
-    width: 80%
+    width: 80%;
   }
 }

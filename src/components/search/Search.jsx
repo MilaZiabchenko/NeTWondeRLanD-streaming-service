@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import './Search.css';
 
 const Search = ({ inputText, handleChange, clearInput }) => (
@@ -6,16 +7,16 @@ const Search = ({ inputText, handleChange, clearInput }) => (
       type='text'
       value={inputText}
       onChange={handleChange}
-      placeholder='Search for a show'
+      placeholder='Search...'
     />
-    <div className='search-icon'>
+    <button className='search-icon'>
       {inputText === '' ? (
         <i className='fas fa-search fa-2x'></i>
       ) : (
         <i className='fas fa-times fa-2x clear-btn' onClick={clearInput}></i>
       )}
-    </div>
+    </button>
   </section>
 );
 
-export default Search;
+export default memo(Search);
