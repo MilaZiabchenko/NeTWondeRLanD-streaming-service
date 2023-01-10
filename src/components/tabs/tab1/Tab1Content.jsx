@@ -1,7 +1,7 @@
-import Beth_1 from '../../../images/beth_1.jpg';
-import Beth_2 from '../../../images/beth_2.jpg';
-import Beth_3 from '../../../images/beth_3.jpg';
-import Beth_4 from '../../../images/beth_4.jpg';
+import Beth_1 from '../../../assets/beth_1.jpg';
+import Beth_2 from '../../../assets/beth_2.jpg';
+import Beth_3 from '../../../assets/beth_3.jpg';
+import Beth_4 from '../../../assets/beth_4.jpg';
 import Tab1ContentItem from './Tab1ContentItem';
 import './Tab1Content.css';
 

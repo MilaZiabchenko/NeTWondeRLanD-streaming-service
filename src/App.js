@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Welcome from './pages/welcome/Welcome';
 import SignUp from './pages/signUp/SignUp';
@@ -10,48 +15,52 @@ import ShowDetails from './pages/showDetails/ShowDetails';
 import Favorites from './pages/favorites/Favorites';
 import NotFound from './pages/notFound/NotFound';
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/'>
+      <Route index element={<Welcome />} />
+      <Route path='signup' element={<SignUp />} />
+      <Route path='login' element={<LogIn />} />
+      <Route
+        path='home'
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='shows'
+        element={
+          <ProtectedRoute>
+            <Shows />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='shows/:showId'
+        element={
+          <ProtectedRoute>
+            <ShowDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='favorites'
+        element={
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        }
+      />
+      <Route path='*' element={<NotFound />} />
+    </Route>
+  )
+);
+
 const App = () => (
   <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Welcome />} />
-        <Route path='signup' element={<SignUp />} />
-        <Route path='login' element={<LogIn />} />
-        <Route
-          path='home'
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='shows'
-          element={
-            <ProtectedRoute>
-              <Shows />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='shows/:showId'
-          element={
-            <ProtectedRoute>
-              <ShowDetails />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='favorites'
-          element={
-            <ProtectedRoute>
-              <Favorites />
-            </ProtectedRoute>
-          }
-        />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </AuthProvider>
 );
 

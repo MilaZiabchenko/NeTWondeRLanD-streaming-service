@@ -4,7 +4,7 @@ import useInput from '../hooks/useInput';
 import useDebounce from '../hooks/useDebounce';
 import Header from '../components/header/Header';
 import Search from '../components/search/Search';
-import spinner from '../images/spinner.gif';
+import spinner from '../assets/spinner.gif';
 import ShowsGrid from '../components/showsGrid/ShowsGrid';
 import Footer from '../components/footer/Footer';
 

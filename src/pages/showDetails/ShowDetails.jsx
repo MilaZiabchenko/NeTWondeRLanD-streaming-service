@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useAxios from '../../hooks/useAxios';
-import spinner from '../../images/spinner.gif';
+import spinner from '../../assets/spinner.gif';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import NotFound from '../../pages/notFound/NotFound';
@@ -129,8 +129,11 @@ const ShowDetails = () => {
                     <i className='fa-solid fa-arrow-right'></i>
                   </a>
                 </p>
-                <button className='btn btn-transparent btn-center'>
-                  <i className={heartIcon} onClick={handleLikes}></i>
+                <button
+                  className='btn btn-transparent btn-center'
+                  onClick={handleLikes}
+                >
+                  <i className={heartIcon}></i>
                 </button>
                 <button
                   className='btn btn-lg btn-center'

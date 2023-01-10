@@ -1,7 +1,7 @@
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useAxios from '../../hooks/useAxios';
 import { useEffect, useMemo } from 'react';
-import spinner from '../../images/spinner.gif';
+import spinner from '../../assets/spinner.gif';
 import { Link } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
