@@ -15,7 +15,6 @@ const Header = ({ handleLogout }) => (
           <NavLink to='/shows'>Shows</NavLink>
         </li>
         <li>
-          {' '}
           <NavLink to='/favorites'>Favorites</NavLink>
         </li>
         <li>

@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 import Footer from '../../components/footer/Footer';
 import './LogIn.css';
 
 const LogIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { logIn, googleSignIn } = useAuthContext();
   const [error, setError] = useState('');
+  const { logIn, googleSignIn } = useAuthContext();
   const navigate = useNavigate();
 
   const handleSubmit = async e => {

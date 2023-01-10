@@ -1,7 +1,7 @@
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useAxios from '../../hooks/useAxios';
 import { useEffect, useMemo } from 'react';
-import spinner from '../../images/spinner.gif';
+import spinner from '../../assets/spinner.gif';
 import { Link } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -11,7 +11,7 @@ const Favorites = () => {
   const {
     isLoading,
     data: allShows,
-    error,
+    error
   } = useAxios('https://api.tvmaze.com/shows');
 
   const [favorites, setFavorites] = useLocalStorage('favoriteShows', []);
@@ -61,7 +61,7 @@ const Favorites = () => {
         )}
         {error && (
           <h3 className='text-lg'>
-            <span>Oops error :(</span>
+            <span>Oops, ${error.message} :(</span>
           </h3>
         )}
       </main>

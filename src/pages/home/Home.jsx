@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 import Header from '../../components/header/Header';
 import Tabs from '../../components/tabs/Tabs';
 import Footer from '../../components/footer/Footer';

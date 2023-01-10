@@ -4,9 +4,9 @@ import useInput from '../hooks/useInput';
 import useDebounce from '../hooks/useDebounce';
 import Header from '../components/header/Header';
 import Search from '../components/search/Search';
-import spinner from '../images/spinner.gif';
-import ShowsGrid from '../components/showsGrid/ShowsGrid';
+import ShowsGrid from '../components/shows/ShowsGrid';
 import Footer from '../components/footer/Footer';
+import spinner from '../assets/spinner.gif';
 
 const Shows = () => {
   const {
@@ -34,7 +34,7 @@ const Shows = () => {
         {isLoading && <img src={spinner} className='spinner' alt='' />}
         {error ? (
           <h3 className='text-lg'>
-            <span>Oops error :(</span>
+            <span>Oops, ${error.message} :(</span>
           </h3>
         ) : (
           <>

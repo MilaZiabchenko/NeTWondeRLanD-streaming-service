@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import ShowsGridItem from './showsGridItem/ShowsGridItem';
+import ShowsGridItem from './ShowsGridItem';
 import './ShowsGrid.css';
 
 const ShowsGrid = ({ shows }) => (

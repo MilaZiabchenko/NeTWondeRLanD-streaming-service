@@ -117,7 +117,7 @@ i {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url('images/beth_background.jpg') no-repeat center center/cover;
+  background: url('assets/beth_background.jpg') no-repeat center center/cover;
 }
 
 .showcase-top {
@@ -126,7 +126,7 @@ i {
   align-items: center;
   justify-content: space-between;
   width: 90%;
-  margin: 3.75rem auto;
+  margin: 3rem auto;
   z-index: 10;
 }
 
@@ -158,7 +158,7 @@ a.logo:hover {
 }
 
 .spinner {
-  width: min(33vw, 180px);
+  width: min(25vw, 125px);
   margin: auto;
 }
 
@@ -167,7 +167,7 @@ a.logo:hover {
   height: 100vh;
   top: -100px;
   overflow: hidden;
-  background: url('images/glass_chess.jpg') no-repeat center center/cover;
+  background: url('assets/glass_chess.webp') no-repeat center center/cover;
 }
 
 .modal-content {
