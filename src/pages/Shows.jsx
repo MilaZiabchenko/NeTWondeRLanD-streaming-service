@@ -5,6 +5,7 @@ import useDebounce from '../hooks/useDebounce';
 import Header from '../components/header/Header';
 import Search from '../components/search/Search';
 import ShowsGrid from '../components/shows/ShowsGrid';
+import ShowsList from '../components/shows/ShowsList';
 import Footer from '../components/footer/Footer';
 import spinner from '../assets/spinner.gif';
 
@@ -12,7 +13,7 @@ const Shows = () => {
   const {
     isLoading,
     data: shows,
-    error,
+    error
   } = useAxios('https://api.tvmaze.com/shows');
   const { value: inputText, handleChange, clearInput } = useInput('');
   const debouncedQuery = useDebounce(inputText, 250);
@@ -34,7 +35,7 @@ const Shows = () => {
         {isLoading && <img src={spinner} className='spinner' alt='' />}
         {error ? (
           <h3 className='text-lg'>
-            <span>Oops, ${error.message} :(</span>
+            <span>Oops, {error.message} :(</span>
           </h3>
         ) : (
           <>
@@ -43,7 +44,9 @@ const Shows = () => {
               handleChange={handleChange}
               clearInput={clearInput}
             />
-            <ShowsGrid shows={searchedShows ? searchedShows : allShows} />
+            <ShowsGrid>
+              <ShowsList shows={searchedShows ? searchedShows : allShows} />
+            </ShowsGrid>
           </>
         )}
         {inputText !== '' && searchedShows.length === 0 && (

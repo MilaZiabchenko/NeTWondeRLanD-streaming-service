@@ -112,7 +112,7 @@ const ShowDetails = () => {
   if (error)
     return (
       <h3 className='text-lg'>
-        <span>Oops, ${error.message} :(</span>
+        <span>Oops, {error.message} :(</span>
       </h3>
     );
 

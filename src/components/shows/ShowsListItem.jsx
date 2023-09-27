@@ -1,6 +1,6 @@
-import './ShowsGridItem.css';
+import './ShowsListItem.css';
 
-const ShowsGridItem = ({ show }) => (
+const ShowsListItem = ({ show }) => (
   <article className='card'>
     <div className='card-inner'>
       <div className='card-front'>
@@ -36,4 +36,4 @@ const ShowsGridItem = ({ show }) => (
   </article>
 );
 
-export default ShowsGridItem;
+export default ShowsListItem;

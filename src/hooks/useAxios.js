@@ -9,23 +9,30 @@ const initialState = {
 
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
-    case 'fetch_init':
+    case 'fetch_init': {
       return {
         ...initialState,
         isLoading: true
       };
-    case 'fetch_success':
+    }
+
+    case 'fetch_success': {
       return {
         ...initialState,
         data: action.payload
       };
-    case 'fetch_failure':
+    }
+
+    case 'fetch_failure': {
       return {
         ...initialState,
         error: action.payload
       };
-    default:
+    }
+
+    default: {
       return state;
+    }
   }
 };
 
