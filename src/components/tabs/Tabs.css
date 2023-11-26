@@ -1,14 +1,10 @@
 .tabs {
-  border-bottom: 5px solid hsl(0, 0%, 24%);
-}
-
-.tabs {
-  background: hsl(0, 0%, 8%);
   padding-top: 2rem;
-  border-right: none;
+  border-bottom: 5px solid var(--dark-color);
+  background-color: var(--bg-secondary);
 }
 
-.tabs .container {
+.tabs > .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 1rem;
@@ -17,37 +13,159 @@
   text-align: center;
 }
 
+.tabs > .container > div {
+  padding: 1.5rem 0;
+  cursor: pointer;
+}
+
+.tabs > .container > div:hover {
+  color: var(--light-color);
+}
+
 .tabs p {
   font-size: 1.2rem;
   padding-top: 0.5rem;
 }
 
-.tabs .container > div {
-  padding: 1.5rem 0;
-}
-
-.tabs .container > div:hover {
-  color: var(--light-color);
-  cursor: pointer;
-}
-
 .tab-border {
-  border-bottom: var(--primary-color) 5px solid;
+  border-bottom: 5px solid var(--primary-color);
 }
 
-.tab-content {
+.selected-tab-content {
   padding: 3rem 0;
   color: var(--light-color);
 }
 
-.show {
-  display: block !important;
-  opacity: 1 !important;
-  transition: all 1000 ease-in;
+.watch-tab-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  max-width: 1250px;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.watch-tab-card-image {
+  height: 280px;
+  max-width: 420px;
+  margin: 3rem auto;
+  border: none;
+  box-shadow: 0 0 3rem var(--primary-color);
+  outline: 3px solid hsla(0, 5%, 65%, 0.25);
+  outline-offset: 9px;
+  transition: all 350ms ease-in-out;
+}
+
+.watch-tab-card-image:hover {
+  scale: 1.05;
+  box-shadow: 0 0 5rem var(--primary-color);
+}
+
+.watch-tab-card-title {
+  margin-block: 1.5rem;
+  font-weight: normal;
+  font-size: 1.35rem;
+}
+
+.watch-tab-card-text {
+  max-width: clamp(280px, 85%, 320px);
+  margin: 0 auto;
+  color: var(--text-color);
+  font-size: 1.075rem;
+}
+
+.cancel-tab-content-items {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-tab-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  height: 390px;
+  width: 399px;
+  margin-top: 3rem;
+  border: 1.5rem solid var(--primary-color);
+  border-radius: 4.75rem;
+  overflow: hidden;
+}
+
+.price-tab-table {
+  width: 100%;
+  margin: 5rem 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.price-tab-table thead th {
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+.price-tab-table tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.price-tab-table tbody tr td {
+  color: var(--text-color);
+  padding: 1rem;
+  text-align: center;
+}
+
+.price-tab-table tbody tr td:first-child {
+  text-align: left;
+  color: var(--light-color);
+}
+
+.price-tab-table tbody tr:nth-child(odd) {
+  background-color: var(--dark-color);
+}
+
+@media (max-width: 980px) {
+  .watch-tab-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cancel-tab-content-items {
+    margin-top: 0;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }
 
 @media (max-width: 600px) {
   .tabs p {
     font-size: 1rem;
+  }
+
+  .watch-tab-card-image:hover {
+    scale: 1.01;
+    box-shadow: 0 0 2.5rem var(--primary-color);
+  }
+
+  .price-tab-table thead th:nth-child(2),
+  .price-tab-table tbody tr td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .selected-tab-content {
+    padding: 2rem 0;
+  }
+
+  .cancel-tab-image {
+    height: 300px;
+    width: 307px;
+    border-width: 1rem;
+    border-radius: 3.5rem;
   }
 }

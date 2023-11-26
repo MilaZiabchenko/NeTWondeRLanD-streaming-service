@@ -1,51 +1,46 @@
-import Tab1Content from './tab-1/Tab1Content';
-import Tab2Content from './tab-2/Tab2Content';
-import Tab3Content from './tab-3/Tab3Content';
-import useToggleIndex from '../../hooks/useToggleIndex';
+import { useTab } from '../../hooks';
+import { WATCH_ANYWHERE, CANCEL_ANYTIME, PICK_YOUR_PRICE } from './constants';
+import WatchTabContent from './tabs-content/WatchTabContent';
+import PriceTabContent from './tabs-content/PriceTabContent';
+import CancelTabContent from './tabs-content/CancelTabContent';
 import './Tabs.css';
 
-const FIRST_TAB = 1;
-const SECOND_TAB = 2;
-const THIRD_TAB = 3;
-
 const Tabs = () => {
-  const [tabIndex, setTabIndex] = useToggleIndex(FIRST_TAB);
+  const [tab, switchTab] = useTab(WATCH_ANYWHERE);
 
   return (
     <>
       <section className='tabs'>
         <div className='container'>
           <div
-            id='tab-1'
-            className={tabIndex === FIRST_TAB ? 'tab-border' : null}
-            onClick={() => setTabIndex(FIRST_TAB)}
+            className={tab === WATCH_ANYWHERE ? 'tab-border' : null}
+            onClick={() => switchTab(WATCH_ANYWHERE)}
           >
             <i className='fas fa-tablet-alt fa-3x'></i>
-            <p>Watch anywhere</p>
+            <p>{WATCH_ANYWHERE}</p>
           </div>
+
           <div
-            id='tab-2'
-            className={tabIndex === SECOND_TAB ? 'tab-border' : null}
-            onClick={() => setTabIndex(SECOND_TAB)}
-          >
-            <i className='fas fa-door-open fa-3x'></i>
-            <p>Cancel anytime</p>
-          </div>
-          <div
-            id='tab-3'
-            className={tabIndex === THIRD_TAB ? 'tab-border' : null}
-            onClick={() => setTabIndex(THIRD_TAB)}
+            className={tab === PICK_YOUR_PRICE ? 'tab-border' : null}
+            onClick={() => switchTab(PICK_YOUR_PRICE)}
           >
             <i className='fas fa-tags fa-3x'></i>
-            <p>Pick your price</p>
+            <p>{PICK_YOUR_PRICE}</p>
+          </div>
+          <div
+            className={tab === CANCEL_ANYTIME ? 'tab-border' : null}
+            onClick={() => switchTab(CANCEL_ANYTIME)}
+          >
+            <i className='fas fa-door-open fa-3x'></i>
+            <p>{CANCEL_ANYTIME}</p>
           </div>
         </div>
       </section>
-      <section className='tab-content'>
+      <section className='selected-tab-content'>
         <div className='container'>
-          <Tab1Content className={tabIndex === FIRST_TAB ? 'show' : null} />
-          <Tab2Content className={tabIndex === SECOND_TAB ? 'show' : null} />
-          <Tab3Content className={tabIndex === THIRD_TAB ? 'show' : null} />
+          {tab === WATCH_ANYWHERE && <WatchTabContent />}
+          {tab === PICK_YOUR_PRICE && <PriceTabContent />}
+          {tab === CANCEL_ANYTIME && <CancelTabContent />}
         </div>
       </section>
     </>

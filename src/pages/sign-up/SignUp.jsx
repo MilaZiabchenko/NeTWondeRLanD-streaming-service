@@ -1,99 +1,34 @@
-import { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthContext';
-import Footer from '../../components/footer/Footer';
-import './SignUp.css';
+import { Link } from 'react-router-dom';
+import { useTitle } from '../../hooks';
+import { Header, Footer } from '../../components';
+import SignUpForm from './SignUpForm';
 
 const SignUp = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const [error, setError] = useState('');
-  const { signUp, googleSignIn } = useAuthContext();
-  const navigate = useNavigate();
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      await signUp(emailRef.current.value, passwordRef.current.value);
-      navigate('/home');
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleGoogleSignIn = async e => {
-    e.preventDefault();
-
-    try {
-      await googleSignIn();
-      navigate('/home');
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+  useTitle('Sign Up');
 
   return (
     <>
-      <header className='showcase-top'>
-        <Link to='/' className='logo'>
-          NeTWondeRLanD
-        </Link>
-        <nav className='links'>
-          <Link to='/login' className='btn btn-rounded'>
+      <div className='modal-background'>
+        <Header>
+          <Link to='/login' className='btn'>
             Log In
           </Link>
-        </nav>
-      </header>
-      <main>
-        <div className='modal'>
-          <div className='modal-content'>
-            <section className='sign-in'>
-              <h2 className='text-xl'>
-                <span>Sign Up</span>
-              </h2>
-              {error && (
-                <p>
-                  <span>{error}</span>
-                </p>
-              )}
-              <form onSubmit={handleSubmit}>
-                <input
-                  type='email'
-                  ref={emailRef}
-                  placeholder='Email'
-                  autoComplete='off'
-                  required
-                />
-                <input
-                  type='password'
-                  ref={passwordRef}
-                  placeholder='Password'
-                  autoComplete='off'
-                  required
-                />
-                <button type='submit' className='btn btn-submit'>
-                  Sign Up
-                </button>
-                <p className='text-center'>or</p>
-                <button
-                  type='submit'
-                  className='btn btn-submit'
-                  onClick={handleGoogleSignIn}
-                >
-                  <i className='fa-brands fa-google'> </i> Sign In With Google
-                </button>
-              </form>
-              <p>
-                Already have an account?
-                <Link to='/login'>
-                  <strong className='text-black'> Log in.</strong>
-                </Link>
-              </p>
-            </section>
-          </div>
-        </div>
-      </main>
+        </Header>
+        <main>
+          <section className='modal-content-center'>
+            <h2 className='text-lg text-bold'>
+              <span>Sign Up</span>
+            </h2>
+            <SignUpForm />
+            <p>
+              Already have an account?
+              <Link to='/login'>
+                <strong> Log in.</strong>
+              </Link>
+            </p>
+          </section>
+        </main>
+      </div>
       <Footer />
     </>
   );

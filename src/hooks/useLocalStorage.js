@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useLocalStorage = (storageKey, fallbackState) => {
+const useLocalStorage = (storageKey, fallbackState = []) => {
   const [value, setValue] = useState(
     JSON.parse(localStorage.getItem(storageKey)) ?? fallbackState
   );

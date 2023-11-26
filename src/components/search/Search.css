@@ -11,9 +11,13 @@
   border: 2px solid var(--border-color);
   border-right: 0px solid transparent;
   border-radius: 50px 0 0 50px;
-  background-color: transparent;
+  background-color: var(--bg-primary);
   color: var(--light-color);
   font-size: 1.5em;
+}
+
+.search input::placeholder {
+  color: var(--text-color);
 }
 
 .search-icon {

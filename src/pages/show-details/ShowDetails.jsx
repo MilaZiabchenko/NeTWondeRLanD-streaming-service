@@ -1,156 +1,153 @@
-import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import useAxios from '../../hooks/useAxios';
-import spinner from '../../assets/spinner.gif';
-import Header from '../../components/header/Header';
-import Footer from '../../components/footer/Footer';
-import NotFound from '../../pages/not-found/NotFound';
+import { useParams } from 'react-router-dom';
+import { useAxios, useTitle, useLocalStorage } from '../../hooks';
+import {
+  LIKE_ICON,
+  UNLIKE_ICON,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES
+} from './constants';
+import {
+  Header,
+  LoadingSpinner,
+  ErrorMessage,
+  PrimaryNavigation,
+  SecondaryNavigation,
+  Footer
+} from '../../components';
+import ShowDetailsCard from './ShowDetailsCard';
 import './ShowDetails.css';
-
-const DISLIKE_ICON = 'fa-regular fa-heart fa-3x text-center';
-const LIKE_ICON = 'fa-solid fa-heart fa-3x text-center';
-const ADD_TO_FAVORITES = 'Add to Favorites';
-const REMOVE_FROM_FAVORITES = 'Remove from Favorites';
 
 const ShowDetails = () => {
   const { showId } = useParams();
+
   const {
     isLoading,
-    data: show,
-    error
+    error,
+    data: show
   } = useAxios(`https://api.tvmaze.com/shows/${showId}`);
-  const [liked, setLiked] = useLocalStorage('likedShows', []);
-  const [favorites, setFavorites] = useLocalStorage('favoriteShows', []);
-  const [icon, setIcon] = useState(DISLIKE_ICON);
+
+  const SHOW_TITLE = show?.name;
+
+  useTitle(SHOW_TITLE);
+
+  const [likedShows, setLikedShows] = useLocalStorage('likedShows');
+  const [icon, setIcon] = useState(UNLIKE_ICON);
+
+  const [favoriteShows, setFavoriteShows] = useLocalStorage('favoriteShows');
   const [btnText, setBtnText] = useState(ADD_TO_FAVORITES);
 
   useEffect(() => {
-    const likedShows = JSON.parse(localStorage.getItem('likedShows'));
+    const storedLikedShows = JSON.parse(localStorage.getItem('likedShows'));
 
-    if (likedShows) {
-      setLiked(likedShows);
-
-      if (likedShows.includes(show?.name)) {
+    if (storedLikedShows) {
+      setLikedShows(storedLikedShows);
+      if (storedLikedShows.includes(SHOW_TITLE)) {
         setIcon(LIKE_ICON);
       }
     }
-  }, [setLiked, show?.name]);
+  }, [setLikedShows, SHOW_TITLE]);
 
   useEffect(() => {
-    const favoriteShows = JSON.parse(localStorage.getItem('favoriteShows'));
+    const storedFavoriteShows = JSON.parse(
+      localStorage.getItem('favoriteShows')
+    );
 
-    if (favoriteShows) {
-      setFavorites(favoriteShows);
-
-      if (favoriteShows.includes(show?.name)) {
+    if (storedFavoriteShows) {
+      setFavoriteShows(storedFavoriteShows);
+      if (storedFavoriteShows.includes(SHOW_TITLE)) {
         setBtnText(REMOVE_FROM_FAVORITES);
       }
     }
-  }, [setFavorites, show?.name]);
+  }, [setFavoriteShows, SHOW_TITLE]);
 
-  const handleLikes = () => {
-    if (icon === DISLIKE_ICON) {
-      const updatedLiked = liked.length ? [...liked, show.name] : [show.name];
+  const handleLikedShows = () => {
+    if (icon === UNLIKE_ICON) {
+      const updatedLikedShows =
+        likedShows.length > 0 ? [...likedShows, SHOW_TITLE] : [SHOW_TITLE];
 
-      localStorage.setItem(
-        'likedShows',
-        JSON.stringify([...new Set(updatedLiked)])
-      );
+      localStorage.setItem('likedShows', JSON.stringify(updatedLikedShows));
 
-      setLiked(updatedLiked);
+      setLikedShows(updatedLikedShows);
       setIcon(LIKE_ICON);
     }
 
     if (icon === LIKE_ICON) {
-      if (JSON.parse(localStorage.getItem('likedShows').includes(show.name))) {
-        const updatedLiked = liked.filter(likedShow => likedShow !== show.name);
+      const updatedLikedShows = likedShows.filter(
+        likedShow => likedShow !== SHOW_TITLE
+      );
 
-        localStorage.setItem('likedShows', JSON.stringify(updatedLiked));
+      localStorage.setItem('likedShows', JSON.stringify(updatedLikedShows));
 
-        setLiked(updatedLiked);
-      }
-
-      setIcon(DISLIKE_ICON);
+      setLikedShows(updatedLikedShows);
+      setIcon(UNLIKE_ICON);
     }
   };
 
-  const handleFavorites = () => {
+  const handleFavoriteShows = () => {
     if (btnText === ADD_TO_FAVORITES) {
-      const updatedFavorites = favorites.length
-        ? [...favorites, show.name]
-        : [show.name];
+      const updatedFavoriteShows =
+        favoriteShows.length > 0
+          ? [...favoriteShows, SHOW_TITLE]
+          : [SHOW_TITLE];
 
       localStorage.setItem(
         'favoriteShows',
-        JSON.stringify([...new Set(updatedFavorites)])
+        JSON.stringify(updatedFavoriteShows)
       );
 
-      setFavorites(updatedFavorites);
+      setFavoriteShows(updatedFavoriteShows);
       setBtnText(REMOVE_FROM_FAVORITES);
     }
 
     if (btnText === REMOVE_FROM_FAVORITES) {
-      if (
-        JSON.parse(localStorage.getItem('favoriteShows').includes(show.name))
-      ) {
-        const updatedFavorites = favorites.filter(
-          favShow => favShow !== show.name
-        );
+      const updatedFavoriteShows = favoriteShows.filter(
+        favShow => favShow !== SHOW_TITLE
+      );
 
-        localStorage.setItem('favoriteShows', JSON.stringify(updatedFavorites));
+      localStorage.setItem(
+        'favoriteShows',
+        JSON.stringify(updatedFavoriteShows)
+      );
 
-        setFavorites(updatedFavorites);
-      }
-
+      setFavoriteShows(updatedFavoriteShows);
       setBtnText(ADD_TO_FAVORITES);
     }
   };
 
-  if (isLoading) return <img src={spinner} className='spinner' alt='' />;
-
-  if (error)
-    return (
-      <h3 className='text-lg'>
-        <span>Oops, {error.message} :(</span>
-      </h3>
-    );
-
-  return show?.id ? (
+  return (
     <>
-      <Header />
-      <main>
-        <article className='show-details'>
-          <h2>{show.name}</h2>
-          <div className='card-details'>
-            {show.summary && (
-              <p>{show.summary.replace(/<\/?[\w\s]*>|<.+[\W]>/g, '')}</p>
-            )}
-            <p>
-              <a href={show.url} target='_blank' rel='noreferrer'>
-                <span>
-                  View more info about
-                  <span className='text-bold'> {show.name} </span>
-                </span>
-                <i className='fa-solid fa-arrow-right'></i>
-              </a>
-            </p>
-            <button
-              className='btn btn-transparent btn-center'
-              onClick={handleLikes}
-            >
-              <i className={icon}></i>
-            </button>
-            <button className='btn btn-lg btn-center' onClick={handleFavorites}>
-              {btnText}
-            </button>
-          </div>
-        </article>
+      <Header className='primary-header'>
+        <PrimaryNavigation />
+      </Header>
+      <main className='main-container'>
+        {isLoading && <LoadingSpinner />}
+        {error && <ErrorMessage error={error} />}
+        {show?.id && (
+          <section>
+            <article className='show-details'>
+              <h2 className='text-lg'>{SHOW_TITLE}</h2>
+              <ShowDetailsCard
+                show={show}
+                icon={icon}
+                btnText={btnText}
+                handleLikedShows={handleLikedShows}
+                handleFavoriteShows={handleFavoriteShows}
+              />
+            </article>
+            <nav className='show-details-secondary-navigation'>
+              <SecondaryNavigation
+                leftLink='shows'
+                leftTitle='Back to Shows'
+                rightLink='favorites'
+                rightTitle='Go to Favorites'
+              />
+            </nav>
+          </section>
+        )}
       </main>
       <Footer />
     </>
-  ) : (
-    <NotFound />
   );
 };
 

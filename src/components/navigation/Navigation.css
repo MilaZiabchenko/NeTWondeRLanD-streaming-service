@@ -1,0 +1,22 @@
+.links-list li > * {
+  display: inline-block;
+  margin: 0.75rem;
+}
+
+@media (max-width: 380px) {
+  .links-list li > * {
+    margin: 0.5rem;
+  }
+
+  .links-list {
+    margin: 0.75rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .links-list li:last-child {
+    order: -1;
+  }
+}

@@ -1,17 +1,18 @@
-.footer {
-  padding: 1.5rem;
+footer {
+  padding: 1rem;
+  background-color: var(--bg-secondary);
 }
 
-.footer,
-.footer a {
+footer,
+footer a {
   font-size: 0.9rem;
 }
 
-.footer li {
+footer li {
   line-height: 1.9;
 }
 
-.footer .footer-cols {
+.footer-cols {
   max-width: 900px;
   margin: 3rem auto;
   display: grid;
@@ -21,11 +22,7 @@
 }
 
 .copyright {
-  margin: 1rem auto;
-}
-
-.copyright p {
-  padding: 1.5rem;
+  padding-block: 1.25rem;
 }
 
 .copyright span {
@@ -33,7 +30,7 @@
 }
 
 @media (max-width: 500px) {
-  .footer .footer-cols {
+  .footer-cols {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
   }

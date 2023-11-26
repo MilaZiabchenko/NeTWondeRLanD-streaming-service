@@ -1,19 +1,21 @@
-import Welcome from './welcome/Welcome';
+import NeTWondeRLanD from './NeTWondeRLanD';
 import SignUp from './sign-up/SignUp';
 import LogIn from './log-in/LogIn';
-import Home from './home/Home';
-import Shows from './Shows';
+import Home from './Home';
+import Shows from './shows/Shows';
 import ShowDetails from './show-details/ShowDetails';
 import Favorites from './favorites/Favorites';
-import NotFound from './not-found/NotFound';
+import Error from './Error';
+import NotFound from './NotFound';
 
 export {
-  Welcome,
+  NeTWondeRLanD,
   SignUp,
   LogIn,
   Home,
   Shows,
   ShowDetails,
   Favorites,
+  Error,
   NotFound
 };

@@ -1,13 +1,13 @@
-import axios from 'axios';
 import { useRef, useReducer, useEffect } from 'react';
+import axios from 'axios';
 
 const initialState = {
   isLoading: false,
-  data: [],
-  error: null
+  error: null,
+  data: []
 };
 
-const dataFetchReducer = (state, action) => {
+const fetchReducer = (state, action) => {
   switch (action.type) {
     case 'fetch_init': {
       return {
@@ -37,13 +37,13 @@ const dataFetchReducer = (state, action) => {
 };
 
 const useAxios = url => {
-  const [state, dispatch] = useReducer(dataFetchReducer, initialState);
+  const [state, dispatch] = useReducer(fetchReducer, initialState);
   const cachedDataRef = useRef({});
 
   useEffect(() => {
-    const controller = new AbortController();
+    if (!url) return;
 
-    if (!url || !url.trim()) return;
+    const controller = new AbortController();
 
     const fetchData = async () => {
       dispatch({ type: 'fetch_init' });

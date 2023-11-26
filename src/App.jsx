@@ -5,7 +5,8 @@ import {
   Route
 } from 'react-router-dom';
 import {
-  Welcome,
+  Error,
+  NeTWondeRLanD,
   SignUp,
   LogIn,
   Home,
@@ -14,48 +15,23 @@ import {
   Favorites,
   NotFound
 } from './pages';
-import ProtectedRoute from './routes/ProtectedRoute';
+import RootLayout from './layout/RootLayout';
+import ProtectedRoutes from './routes/ProtectedRoutes';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/'>
-      <Route index element={<Welcome />} />
+    <Route path='/' element={<RootLayout />} errorElement={<Error />}>
+      <Route index element={<NeTWondeRLanD />} />
       <Route path='signup' element={<SignUp />} />
       <Route path='login' element={<LogIn />} />
-      <Route
-        path='home'
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path='shows'
-        element={
-          <ProtectedRoute>
-            <Shows />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path='shows/:showId'
-        element={
-          <ProtectedRoute>
-            <ShowDetails />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path='favorites'
-        element={
-          <ProtectedRoute>
-            <Favorites />
-          </ProtectedRoute>
-        }
-      />
+      <Route element={<ProtectedRoutes />}>
+        <Route path='home' element={<Home />} />
+        <Route path='shows' element={<Shows />} />
+        <Route path='shows/:showId' element={<ShowDetails />} />
+        <Route path='favorites' element={<Favorites />} />
+      </Route>
       <Route path='*' element={<NotFound />} />
     </Route>
   )

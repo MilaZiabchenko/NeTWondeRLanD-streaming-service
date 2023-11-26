@@ -19,7 +19,9 @@ import {
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [user, setUser] = useState({});
+
+  const currentUser = useMemo(() => user, [user]);
 
   const signUp = useCallback(
     (email, password) => createUserWithEmailAndPassword(auth, email, password),
@@ -39,21 +41,20 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleAuthProvider);
   }, []);
 
-  const contextValue = useMemo(
-    () => ({ currentUser, signUp, logIn, logOut, googleSignIn }),
-    [currentUser, signUp, logIn, logOut, googleSignIn]
-  );
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user);
+      setUser(user);
     });
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{ currentUser, signUp, logIn, logOut, googleSignIn }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 
